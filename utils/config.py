@@ -1,0 +1,2 @@
+RANDOM_STATE = 42
+TARGET = "is_fraud"

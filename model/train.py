@@ -1,6 +1,7 @@
 from xgboost import XGBClassifier
 from lightgbm import LGBMClassifier
 from sklearn.model_selection import StratifiedKFold
+from utils.config import RANDOM_STATE
 
 class kfold():
     def __init__(self,n_split=5,
@@ -15,7 +16,6 @@ class kfold():
             x_train,x_val = x.iloc[train_idx],x.iloc[val_idx]
             y_train,y_val = y.iloc[train_idx],y.iloc[val_idx]
             yield x_train, x_val, y_train, y_val
-kf5 = kfold()
 
 model = {
     "LGBMClassifier":LGBMClassifier(n_estimators=3000,
@@ -43,5 +43,3 @@ def cv_engine(x, y, models, kf):
         })
         print(name, [round(s, 5) for s in fold_scores])
     return pd.DataFrame(results).sort_values("cv_mean", ascending=False)
-
-cv_engine(x, y, model, kf5)

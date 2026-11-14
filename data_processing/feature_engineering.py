@@ -9,5 +9,3 @@ def add_features(df):
                            "is_ai_generated_scam_attempt"]].sum(axis=1)
     df["cvv_scam"] = df["cvv_retry_count"] * df["is_ai_generated_scam_attempt"]
     return df
-train = add_features(train)
-test = add_features(test)
